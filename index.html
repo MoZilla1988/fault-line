@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101519">
+<meta name="description" content="Fault Line: an electrical tower defense game. Protect the main switchgear from surges, harmonics, ground faults and squirrels.">
+<title>Fault Line</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="game">
+  <header class="top">
+    <div class="brand">Fault<span>Line</span></div>
+    <div class="top-r"><div class="wave">WAVE <b id="wave">0</b>/10</div><button class="help" id="helpBtn" aria-label="Help and tips">?</button></div>
+  </header>
+  <div class="meters">
+    <div class="m"><label>Grid integrity</label><div class="bar"><i id="livesBar"></i></div><b id="lives">20 / 20</b></div>
+    <div class="m cash"><label>Credits</label><b id="money">$200</b></div>
+    <div class="m"><label>Bus load</label><div class="bar"><i id="loadBar"></i></div><b id="load">0 / 80 kW</b></div>
+  </div>
+  <div class="levels" id="levels" aria-label="Campaign progress"></div>
+  <div class="stage">
+    <canvas id="game" aria-label="Game map"></canvas>
+    <div id="brief" class="brief" hidden></div>
+    <div id="coach" class="coach bottom" hidden aria-live="polite"></div>
+    <div id="confirm" class="confirm" hidden>
+      <div class="ci"><b id="cTitle">Place here?</b><span id="cSub"></span></div>
+      <button class="btn" id="cNo">Cancel</button>
+      <button class="btn pri" id="cYes">Place</button>
+    </div>
+  </div>
+  <div id="intel" class="intel" hidden></div>
+  <div id="info" class="info" hidden aria-live="polite"></div>
+  <div id="tray" class="tray"></div>
+  <div id="panel" class="panel" hidden></div>
+  <div class="controls">
+    <p id="hint">Drag a tower onto a pad, or tap one then tap a pad.</p>
+    <button class="btn" id="speed" aria-label="Game speed">1×</button>
+    <button class="btn pri" id="go">Energize wave 1</button>
+  </div>
+</div>
+<div id="ghost" hidden><canvas></canvas></div>
+<div id="help" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+  <div class="sheet">
+    <div class="sh"><h2 id="helpTitle">Field Guide</h2><button class="x" id="helpClose" aria-label="Close help">×</button></div>
+    <section><h3>The job</h3>
+      <p>Faults travel down the feeders toward the main switchgear. Each one that reaches it costs grid integrity, and at zero the site blacks out. Clear all 10 waves, including the boss on wave 10, to unlock the next site. The game pauses while this guide is open.</p></section>
+    <section><h3>Building</h3><ul>
+      <li>Drag a tower from the tray onto a pad, or tap it, tap a pad, and confirm.</li>
+      <li>Tap a placed tower to upgrade, guard, replace a fuse, or sell (70% back). Drag it to move it.</li>
+      <li>Press Energize when you're ready. You earn a bonus after every wave.</li></ul></section>
+    <section><h3>Power</h3><ul>
+      <li>Towers only fire inside a supply ring. The switchgear has one, and each generator adds a big one.</li>
+      <li>Voltage drops toward the edge of a ring, down to 75% damage.</li>
+      <li>Every tower draws kW from the bus. Generators raise the bus capacity.</li>
+      <li>During a utility outage only towers inside a generator ring keep firing.</li></ul></section>
+    <section><h3>Selective coordination</h3>
+      <p>Place a Fuse upstream of a Breaker (farther from the main, within 120px). Both get +25% damage and a green C badge.</p></section>
+    <section><h3>Enemies and counters</h3><div class="ctab" id="helpEnemies"></div></section>
+    <section><h3>Towers</h3><div class="ctab" id="helpTowers"></div></section>
+    <section><h3>Quick tips</h3><ul>
+      <li>Put damage towers at feeder bends so enemies stay in range longer.</li>
+      <li>Check the intel card before each wave. Red items will cost you integrity.</li>
+      <li>Guard your generators before squirrel waves. A shorted generator drops its whole ring.</li>
+      <li>Save credits for wave 9 so you can prepare for the boss.</li></ul>
+      <button class="btn" id="tutReplay" style="align-self:flex-start;margin-top:4px">Replay tutorial<small>Step-by-step: generators, towers, first wave</small></button></section>
+  </div>
+</div>
+<script src="js/game.js"></script>
+</body>
+</html>
